@@ -256,10 +256,11 @@ color:var(--carte);padding:10px 18px;border-radius:12px;font-size:.88rem;opacity
 <div id="popnew"></div>
 <script>
 const API="https://spykipquhadlmlktqhre.supabase.co/functions/v1/api";
+function cleanCode(v){return String(v||"").replace(/[^A-Za-z0-9_-]/g,"")}
 let CODE=(function(){
-  const u=new URLSearchParams(location.search).get('c');
+  const u=cleanCode(new URLSearchParams(location.search).get('c'));
   if(u){localStorage.setItem('code',u);return u}
-  return localStorage.getItem('code')||"";
+  return cleanCode(localStorage.getItem('code'));
 })();
 function api(action,extra){return API+"?action="+action+"&c="+encodeURIComponent(CODE)+(extra||"")}
 function askCode(msg){
@@ -272,6 +273,7 @@ function askCode(msg){
 function saveCode(){
   let v=(document.getElementById('cin').value||"").trim();
   try{const m=v.match(/[?&]c=([^&\s]+)/);if(m)v=decodeURIComponent(m[1]);}catch(e){}
+  v=cleanCode(v);
   if(!v)return;
   localStorage.setItem('code',v);
   location.href=location.pathname;
