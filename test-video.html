@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>test vsl</title></head><body style="background:#111;margin:0">
+<video id="v" src="https://github.com/tonyconsulting/mila/releases/download/vsl/vsl-mila-720.mp4" autoplay muted playsinline controls style="width:100%;max-width:900px;display:block;margin:20px auto"></video>
+<div id="s" style="color:#0f0;font-family:monospace;text-align:center"></div>
+<script>
+const v=document.getElementById('v'),s=document.getElementById('s');
+setInterval(()=>{s.textContent='readyState='+v.readyState+' currentTime='+v.currentTime.toFixed(1)+' paused='+v.paused+' error='+(v.error?v.error.code:'aucune')},800);
+</script></body></html>
